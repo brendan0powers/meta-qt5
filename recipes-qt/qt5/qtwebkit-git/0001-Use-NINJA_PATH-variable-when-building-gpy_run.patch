@@ -1,0 +1,25 @@
+From 5003e8206e1d35126ba9a7826224fdd2cee3894e Mon Sep 17 00:00:00 2001
+From: Brendan Powers <brendan0powers@gmail.com>
+Date: Sun, 7 Dec 2014 09:39:31 -0500
+Subject: [PATCH] Use NINJA_PATH variable when building gpy_run
+
+---
+ src/core/gyp_run.pro | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/core/gyp_run.pro b/src/core/gyp_run.pro
+index 8d4d773..368563f 100644
+--- a/src/core/gyp_run.pro
++++ b/src/core/gyp_run.pro
+@@ -99,7 +99,7 @@ contains(WEBENGINE_CONFIG, proprietary_codecs): GYP_ARGS += "-Dproprietary_codec
+ 
+ build_pass|!debug_and_release {
+     ninja.target = invoke_ninja
+-    ninja.commands = $$findOrBuildNinja() \$\(NINJAFLAGS\) -C "$$OUT_PWD/$$getConfigDir()"
++    ninja.commands = \$\(NINJA_PATH\) \$\(NINJAFLAGS\) -C "$$OUT_PWD/$$getConfigDir()"
+     QMAKE_EXTRA_TARGETS += ninja
+ 
+     build_pass:build_all: default_target.target = all
+-- 
+1.9.1
+
